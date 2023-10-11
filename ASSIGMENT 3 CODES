@@ -1,0 +1,52 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+// Base class Shape
+class Shape {
+protected:
+    double height;
+    double width;
+
+public:
+    Shape(double h, double w) : height(h), width(w) {}
+
+    virtual double getArea() { return 0.0; }        // Virtual function for calculating area
+    virtual double getPerimeter() { return 0.0; }  // Virtual function for calculating perimeter
+};
+
+// Derived class Rectangle
+class Rectangle : public Shape {
+public:
+    Rectangle(double h, double w) : Shape(h, w) {}
+
+    // Override base class functions to calculate area and perimeter
+    double getArea() override { return height * width; }
+    double getPerimeter() override { return 2 * (height + width); }
+};
+
+// Derived class Triangle
+class Triangle : public Shape {
+public:
+    Triangle(double h, double w) : Shape(h, w) {}
+
+    // Override base class functions to calculate area and perimeter
+    double getArea() override { return 0.5 * height * width; }
+    double getPerimeter() override {
+        double side = sqrt(height * height + width * width);
+        return height + width + side;
+    }
+};
+
+int main() {
+    Rectangle rectangle(4.0, 6.0);
+    Triangle triangle(3.0, 4.0);
+
+    cout << "Rectangle Area: " << rectangle.getArea() << endl;
+    cout << "Rectangle Perimeter: " << rectangle.getPerimeter() << endl;
+
+    cout << "Triangle Area: " << triangle.getArea() << endl;
+    cout << "Triangle Perimeter: " << triangle.getPerimeter() << endl;
+
+    return 0;
+}
